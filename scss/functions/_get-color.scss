@@ -8,35 +8,10 @@
   // if they are not valid warn 'Invalid color type or level' and return null
   // null is a special value in Sass that means nothing, and it is used to represent the absence of a value, you need to return null if the type or level is not valid
 
-  $targeted-key: 'brand';
-
-  @if map.has-key($colors , $targeted-key ){
-    @debug 'the key is in list';
-  }   @else{
-    @debug 'the key is not in the list';
-  }
-
-  $targeted-key: 'error';
-
-  @if map.has-key($colors , $targeted-key ){
-    @debug 'the key is in list';
-  }  @else{
-    @debug 'the key is not in the list';
-  }
-
-  $targeted-key: 'warning';
-
-  @if map.has-key($colors , $targeted-key ){
-    @debug 'the key is in list';
-  } @else{
-    @debug 'the key is not in the list';
-  }
-
-  $targeted-key: 'succes';
-
-  @if map.has-key($colors , $targeted-key ){
-    @debug 'the key is in list';
-  } @else{
-    @debug 'the key is not in the list';
-  }
+@if map.has-key($colors) and map.has-key(map.get($type), $level){
+  @return map-get(map-get($type,$level), $colors);
+} @else {
+  @warn 'invalid color type or level';
+  @return null;
+}
 }
